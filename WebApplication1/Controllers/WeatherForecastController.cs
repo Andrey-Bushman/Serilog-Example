@@ -35,21 +35,27 @@ namespace WebApplication1.Controllers {
             sw.Start();
 
             using (_logger.BeginScope(GetScopeInformation())) {
+
+                // Пример №1: в тексте сообщения используем параметр UserName, определённый в рамках Scope.
                 _logger.LogInformation("Приложение работает из под учётной записи {UserName}");
 
+                // Пример №2: вторым параметром можно передавать массив объектов, значения которых можно использовать в тексте, указывая их в формате {AnyName}.
+                // Порядок следования объектов в массиве должен совпадать с порядком следования используемых значений в тексте сообщения.
+                // Добавляемые вами таким образом свойства автоматически будут добавлены и как структурированные свойства ДЛЯ КОНКРЕТНОЙ ДАННОЙ ЗАПИСИ ЛОГА
+                // (вы их увидите в Seq).
                 _logger.LogInformation("Запрос получен контроллером {Controller}, действие {ControllerAction}, DateTime: {DateTime}",
-                 [
-                     nameof(WeatherForecastController),
-                    nameof(Get),
-                    DateTimeOffset.Now,
-                ]);
+                    [
+                        nameof(WeatherForecastController),
+                        nameof(Get),
+                        DateTimeOffset.Now,
+                    ]);
 
                 var service = new WeatherForecastService();
 
                 _logger.LogInformation("Обращение к сервису {Service}",
                     [
                         nameof(WeatherForecastService),
-                ]);
+                    ]);
 
                 var result = await service.ProcessFTemperature();
 
@@ -58,13 +64,13 @@ namespace WebApplication1.Controllers {
                 _logger.LogInformation("Сервис {Service} обработал запрос за {ElapsedTime} мсек",
                     [
                         nameof(WeatherForecastService),
-                    sw.ElapsedMilliseconds,
-                ]);
+                        sw.ElapsedMilliseconds,
+                    ]);
 
                 _logger.LogInformation($"Мы получили {result.Length} прогнозов от сервиса {{Service}}",
                     [
                         nameof(WeatherForecastService),
-                ]);
+                    ]);
 
                 _logger.LogWarning("Тестовое предупреждение++");
                 _logger.LogError(new Exception(), "Тестовая ошибка!++");
