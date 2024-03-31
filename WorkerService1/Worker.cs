@@ -28,16 +28,23 @@ namespace WorkerService1 {
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken) {
 
+            // Формируем область, в рамках которой каждому отправляемому сообщению лога будут присваиваться
+            // дополнительные свойства из объекта, переданного в качестве параметра методу BeginScope().
             using (_logger.BeginScope(CreateScopeInformation())) {
+
                 while (!stoppingToken.IsCancellationRequested) {
-                    if (_logger.IsEnabled(LogLevel.Information)) {
-                        _logger.LogInformation(" -> Воркер запущен в: {time}", DateTimeOffset.Now);
-                        _logger.LogWarning(" -> Некоторое тестовое предупреждение...");
-                        _logger.LogError(new Exception("Шишкин лес"), " -> Некоторое тестовое исключение...");
-                    }
+
+                    await DoWork(_logger);
                     await Task.Delay(1000, stoppingToken);
                 }
             }
+        }
+
+        private static async Task DoWork(ILogger logger) {
+
+            logger.LogInformation(" -> Воркер запущен в: {time}", DateTimeOffset.Now);
+            logger.LogWarning(" -> Некоторое тестовое предупреждение...");
+            logger.LogError(new Exception("Шишкин лес"), " -> Некоторое тестовое исключение...");
         }
     }
 }

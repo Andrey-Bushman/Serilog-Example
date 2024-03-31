@@ -1,0 +1,64 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.*": "Trace",
+      "WebApplication1.*": "Trace"
+    },
+    "EventLog": {
+      "LogLevel": {
+        "Default": "Critical",
+        "WebApplication1.*": "Information"
+      }
+    }
+  },
+
+  "AllowedHosts": "*",
+
+  "Serilog": {
+    "MinimumLevel": {
+      "Default": "Information",
+      "Override": {
+        "Microsoft": "Warning",
+        "Microsoft.Hosting.Lifetime": "Warning"
+      }
+    },
+    "Using": [
+      "Serilog.Sinks.Console",
+      "Serilog.Sinks.File",
+      "Serilog.Sinks.Seq",
+      "Serilog.Sinks.EventLog",
+      "Serilog.Formatting.Compact"
+    ],
+    "WriteTo": [
+      {
+        "Name": "Console"
+      },
+      {
+        "Name": "File",
+        "Args": {
+          "path": "./log/log.json",
+          "rollingInterval": "Day",
+          "rollOnFileSizeLimit": true,
+          "FileSizeLimitBytes": 52428800,
+          "retainedFileCountLimit": 21,
+          "formatter": "Serilog.Formatting.Compact.CompactJsonFormatter, Serilog.Formatting.Compact"
+        }
+      },
+      {
+        "Name": "Seq",
+        "Args": {
+          "serverUrl": "http://localhost:5341/"
+        }
+      },
+      {
+        "Name": "EventLog",
+        "Args": {
+          "source": "ConsoleApp1",
+          "manageEventSource": true,
+          "restrictedToMinimumLevel": "Information"
+        }
+      }
+    ]
+  }
+}

@@ -1,7 +1,7 @@
 ﻿
 # WebApplication1
 
-Проект создан на основе шаблона `ASP.NET Core Web API`.
+Проект создан на основе шаблона `ASP.NET Core Web API` на платформе `.Net 8`.
 
 В данном приложении приводится пример работы с логом посредством интерфейса `Microsoft.Extensions.Logging.ILogger<T>`,
 определённого в составе NuGet-пакета `Microsoft.Extensions.Logging.Abstractions`. При этом _"под капотом"_ в качестве

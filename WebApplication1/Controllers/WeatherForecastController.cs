@@ -40,6 +40,8 @@ namespace WebApplication1.Controllers {
             var sw = new Stopwatch();
             sw.Start();
 
+            // Формируем область, в рамках которой каждому отправляемому сообщению лога будут присваиваться
+            // дополнительные свойства из объекта, переданного в качестве параметра методу BeginScope().
             using (_logger.BeginScope(CreateScopeInformation())) {
 
                 // Пример №1: в тексте сообщения используем параметр UserName, определённый в рамках Scope.
