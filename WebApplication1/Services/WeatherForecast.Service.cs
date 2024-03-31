@@ -1,4 +1,4 @@
-﻿namespace WebApplication1.Services {
+namespace WebApplication1.Services {
     public class WeatherForecastService {
 
         private static readonly string[] Summaries = new[]
@@ -8,7 +8,7 @@
 
         public async Task<WeatherForecast[]> ProcessFTemperature() {
 
-            await Task.Delay(10);
+            await Task.Delay(10); // Имитируем долгую обработку
 
             var result = Enumerable.Range(1, 5).Select(index => new WeatherForecast {
                 Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
@@ -17,7 +17,7 @@
             })
             .ToArray();
 
-            await Task.Delay(10);
+            await Task.Delay(10); // Имитируем долгую обработку
 
             return result;
         }
