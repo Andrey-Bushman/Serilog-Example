@@ -11,6 +11,12 @@ namespace WebApplication1.Controllers {
         private readonly ILogger<WeatherForecastController> _logger;
         private readonly IHostEnvironment _hostEnv;
 
+        /// <summary>
+        /// Сформировать дополнительный набор свойств, который хотим
+        /// добавлять ко всем сообщениям лога в рамках Scope, в котором
+        /// этот набор будет использоваться.
+        /// </summary>
+        /// <returns></returns>
         private Dictionary<string, object> GetScopeInformation() {
 
             var scopeInfo = new Dictionary<string, object> {
