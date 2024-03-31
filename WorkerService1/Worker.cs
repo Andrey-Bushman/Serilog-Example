@@ -31,7 +31,9 @@ namespace WorkerService1 {
             using (_logger.BeginScope(CreateScopeInformation())) {
                 while (!stoppingToken.IsCancellationRequested) {
                     if (_logger.IsEnabled(LogLevel.Information)) {
-                        _logger.LogInformation(" -> Worker running at: {time}", DateTimeOffset.Now);
+                        _logger.LogInformation(" -> Воркер запущен в: {time}", DateTimeOffset.Now);
+                        _logger.LogWarning(" -> Некоторое тестовое предупреждение...");
+                        _logger.LogError(new Exception("Шишкин лес"), " -> Некоторое тестовое исключение...");
                     }
                     await Task.Delay(1000, stoppingToken);
                 }
