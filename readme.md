@@ -33,3 +33,41 @@
   * **ConsoleApp1** - Консольное приложение, созданное на основе шаблона `Console Application`. Платформа: `.Net Framework 4.6.2`. Эта
     старая версия задействована автором потому, что её используют плагины **Dynamics 365 CRM**. Т.о. для разработчика создать по
 	аналогии проект для `.Net Framework 4.8` не должно составить труда.
+
+## Примеры лога, полученного при работе приложения WebApplication1
+
+Файл `log20240331.txt`, содержимое которого формировалось на основе указанного нами пользовательского шаблона записи:
+
+```
+2024-03-31 15:42:29.368 +03:00 [INF] | BUSH-DESKTOP | Logging Scopes | Андрей | 0HN2HG01M1EJB:00000004 | Приложение работает из под учётной записи Андрей|
+2024-03-31 15:42:29.398 +03:00 [INF] | BUSH-DESKTOP | Logging Scopes | Андрей | 0HN2HG01M1EJB:00000004 | Запрос получен контроллером WeatherForecastController, действие Get, DateTime: "2024-03-31T15:42:29.3985735+03:00"|
+2024-03-31 15:42:29.403 +03:00 [INF] | BUSH-DESKTOP | Logging Scopes | Андрей | 0HN2HG01M1EJB:00000004 | Обращение к сервису WeatherForecastService|
+2024-03-31 15:42:29.433 +03:00 [INF] | BUSH-DESKTOP | Logging Scopes | Андрей | 0HN2HG01M1EJB:00000004 | Сервис WeatherForecastService обработал запрос за 67 мсек|
+2024-03-31 15:42:29.434 +03:00 [INF] | BUSH-DESKTOP | Logging Scopes | Андрей | 0HN2HG01M1EJB:00000004 | Мы получили 5 прогнозов от сервиса WeatherForecastService|
+2024-03-31 15:42:29.435 +03:00 [WRN] | BUSH-DESKTOP | Logging Scopes | Андрей | 0HN2HG01M1EJB:00000004 | Тестовое предупреждение++|
+2024-03-31 15:42:29.436 +03:00 [ERR] | BUSH-DESKTOP | Logging Scopes | Андрей | 0HN2HG01M1EJB:00000004 | Тестовая ошибка!++|
+System.Exception: Exception of type 'System.Exception' was thrown.
+```
+
+Логи в **Seq**:
+
+![seq](./images/seq.png)
+
+Консольный вывод:
+
+![console](./images/console.png)
+
+Журнал Windows:
+
+![eventlog](./images/eventlog.png)
+
+## Примеры компактного JSON-лога, сохраняемого в файл log20240331.json полученного при работе приложения WorkerService1
+
+```
+{"@t":"2024-03-31T12:57:00.2719321Z","@mt":" -> Воркер запущен в: {time}","time":"2024-03-31T15:57:00.2545694+03:00","SourceContext":"WorkerService1.Worker","MachineName":"BUSH-DESKTOP","UserName":"Андрей","Environment":"Development","AppName":"Logging Scopes"}
+{"@t":"2024-03-31T12:57:00.3176476Z","@mt":" -> Некоторое тестовое предупреждение...","@l":"Warning","SourceContext":"WorkerService1.Worker","MachineName":"BUSH-DESKTOP","UserName":"Андрей","Environment":"Development","AppName":"Logging Scopes"}
+{"@t":"2024-03-31T12:57:00.3193488Z","@mt":" -> Некоторое тестовое исключение...","@l":"Error","@x":"System.Exception: Шишкин лес","SourceContext":"WorkerService1.Worker","MachineName":"BUSH-DESKTOP","UserName":"Андрей","Environment":"Development","AppName":"Logging Scopes"}
+{"@t":"2024-03-31T12:57:01.3354537Z","@mt":" -> Воркер запущен в: {time}","time":"2024-03-31T15:57:01.3353762+03:00","SourceContext":"WorkerService1.Worker","MachineName":"BUSH-DESKTOP","UserName":"Андрей","Environment":"Development","AppName":"Logging Scopes"}
+{"@t":"2024-03-31T12:57:01.3372222Z","@mt":" -> Некоторое тестовое предупреждение...","@l":"Warning","SourceContext":"WorkerService1.Worker","MachineName":"BUSH-DESKTOP","UserName":"Андрей","Environment":"Development","AppName":"Logging Scopes"}
+{"@t":"2024-03-31T12:57:01.3379233Z","@mt":" -> Некоторое тестовое исключение...","@l":"Error","@x":"System.Exception: Шишкин лес","SourceContext":"WorkerService1.Worker","MachineName":"BUSH-DESKTOP","UserName":"Андрей","Environment":"Development","AppName":"Logging Scopes"}
+```
