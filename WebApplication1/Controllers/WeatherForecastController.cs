@@ -17,7 +17,7 @@ namespace WebApplication1.Controllers {
         /// этот набор будет использоваться.
         /// </summary>
         /// <returns></returns>
-        private Dictionary<string, object> GetScopeInformation() {
+        private Dictionary<string, object> CreateScopeInformation() {
 
             var scopeInfo = new Dictionary<string, object> {
                 { "MachineName", Environment.MachineName },
@@ -40,7 +40,7 @@ namespace WebApplication1.Controllers {
             var sw = new Stopwatch();
             sw.Start();
 
-            using (_logger.BeginScope(GetScopeInformation())) {
+            using (_logger.BeginScope(CreateScopeInformation())) {
 
                 // Пример №1: в тексте сообщения используем параметр UserName, определённый в рамках Scope.
                 _logger.LogInformation("Приложение работает из под учётной записи {UserName}");
