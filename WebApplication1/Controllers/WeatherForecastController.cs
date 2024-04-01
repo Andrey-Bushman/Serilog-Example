@@ -52,33 +52,33 @@ namespace WebApplication1.Controllers {
                 // Добавляемые вами таким образом свойства автоматически будут добавлены и как структурированные свойства ДЛЯ КОНКРЕТНОЙ ДАННОЙ ЗАПИСИ ЛОГА
                 // (вы их увидите в Seq).
                 _logger.LogInformation("Запрос получен контроллером {Controller}, действие {ControllerAction}, DateTime: {DateTime}",
-                    [
+                    new object[]{
                         nameof(WeatherForecastController),
                         nameof(Get),
                         DateTimeOffset.Now,
-                    ]);
+                    });
 
                 var service = new WeatherForecastService();
 
                 _logger.LogInformation("Обращение к сервису {Service}",
-                    [
+                    new object[]{
                         nameof(WeatherForecastService),
-                    ]);
+                    });
 
                 var result = await service.ProcessFTemperature();
 
                 sw.Stop();
 
                 _logger.LogInformation("Сервис {Service} обработал запрос за {ElapsedTime} мсек",
-                    [
+                    new object[]{
                         nameof(WeatherForecastService),
                         sw.ElapsedMilliseconds,
-                    ]);
+                    });
 
                 _logger.LogInformation($"Мы получили {result.Length} прогнозов от сервиса {{Service}}",
-                    [
+                    new object[]{
                         nameof(WeatherForecastService),
-                    ]);
+                    });
 
                 _logger.LogWarning("Тестовое предупреждение++");
                 _logger.LogError(new Exception(), "Тестовая ошибка!++");

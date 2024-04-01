@@ -1,7 +1,7 @@
 
 # WorkerService1
 
-Проект создан на основе шаблона `Worker Service` на платформе `.Net 8`.
+Проект создан на основе шаблона `Worker Service` на платформе `.Net 7`.
 
 В данном приложении приводится пример работы с логом посредством интерфейса `Microsoft.Extensions.Logging.ILogger<T>`,
 определённого в составе NuGet-пакета `Microsoft.Extensions.Logging.Abstractions`. При этом _"под капотом"_ в качестве
